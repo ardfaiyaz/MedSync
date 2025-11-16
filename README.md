@@ -71,8 +71,9 @@ SUPABASE_SERVICE_ROLE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhY
 ---
 
 ## 4️⃣ Run the Development Server
-
+```
 npm run dev
+```
 
 ---
 
