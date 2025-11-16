@@ -1,6 +1,5 @@
-# MedSync: Smart Medical Supply Inventory System
-
 <div align="center">
+# MedSync: Smart Medical Supply Inventory System
 
 **MedSync is a web-based medical inventory management system designed to automate medicine tracking, expiration monitoring, stock control, and reporting for the NU Dasmariñas School Clinic.**
 
