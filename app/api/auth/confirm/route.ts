@@ -4,6 +4,10 @@ import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   try {
+    if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
+      return NextResponse.json({ error: "Supabase configuration missing" }, { status: 500 });
+    }
+
     const { email, userId } = await request.json();
 
     if (userId) {

@@ -2,6 +2,9 @@ import { createServerClient } from "@/lib/supabase/Server";
 import { redirect } from "next/navigation";
 import InventoryContent from "./InventoryContent";
 
+// Force dynamic rendering - requires environment variables
+export const dynamic = 'force-dynamic';
+
 export default async function InventoryPage() {
   const supabase = await createServerClient();
   

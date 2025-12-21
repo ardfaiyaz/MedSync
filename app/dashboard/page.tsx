@@ -3,6 +3,9 @@ import { createServerClient } from "@/lib/supabase/Server";
 import { redirect } from "next/navigation";
 import DashboardContent from "./DashboardContent";
 
+// Force dynamic rendering - requires environment variables
+export const dynamic = 'force-dynamic';
+
 export default async function DashboardPage() {
   const supabase = await createServerClient();
   
