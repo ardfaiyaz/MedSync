@@ -24,7 +24,7 @@ export async function confirmUserByEmail(email: string) {
       return { error: listError.message };
     }
 
-    const user = users.find(u => u.email?.toLowerCase() === email.toLowerCase());
+    const user = users.find((u: any) => u.email?.toLowerCase() === email.toLowerCase());
     if (!user) {
       return { error: "User not found" };
     }
