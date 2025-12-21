@@ -1,94 +1,203 @@
+# MedSync - Smart Medical Inventory Management System
 
-# MedSync: Smart Medical Supply Inventory System
-
-**MedSync is a web-based medical inventory management system designed to automate medicine tracking, expiration monitoring, stock control, and reporting for the NU Dasmariñas School Clinic.**
-
-**This project uses **Next.js**, **Tailwind CSS**, and **Supabase** as its core technologies.**
-
-
-
----
+A modern, full-stack medical inventory management system built with Next.js, Supabase, and Tailwind CSS. MedSync helps medical facilities track medicines, monitor expiration dates, manage stock levels, and maintain comprehensive activity logs.
 
 ## 🚀 Features
 
-- Inventory management (add, edit, delete supplies)
-- Expiration tracking with alerts
-- Low-stock monitoring
-- User authentication & role management (Admin/Staff)
-- Activity logs & audit trail
-- Clean dashboard UI using Tailwind CSS
-- Supabase-managed database, auth, and API
-- Secure environment configuration
+### Core Functionality
+- **User Authentication**: Secure sign-up and login with email/password
+- **Dashboard Overview**: Real-time statistics and recent activity tracking
+- **Inventory Management**: Full CRUD operations for medicines
+  - Add, edit, and delete medicines
+  - Search and filter functionality
+  - Status badges (In Stock, Low Stock, Expiring Soon, Expired)
+- **Smart Alerts**: Automatic tracking of:
+  - Low stock items
+  - Expiring medicines (within 30 days)
+  - Expired medicines
+- **Activity Logging**: Complete audit trail of all actions
+- **User Profiles**: Comprehensive user information with email integration
 
----
+### Design & UX
+- **Modern UI**: Clean, professional design with Inter font
+- **Responsive Design**: Works seamlessly on all devices
+- **Smooth Animations**: Polished transitions and animations
+- **Icon-Based Interface**: Lucide React icons throughout
+- **Accessibility**: Proper ARIA labels and keyboard navigation
 
 ## 🛠️ Tech Stack
 
 | Layer | Technology |
 |-------|------------|
-| Framework | **Next.js 14 (App Router)** |
-| Styling | **Tailwind CSS v4** |
-| Backend / Database | **Supabase (PostgreSQL, Auth, Storage)** |
-| Language | **TypeScript** |
+| **Framework** | Next.js 16 (App Router) |
+| **Styling** | Tailwind CSS v4 |
+| **Backend/Database** | Supabase (PostgreSQL, Auth, RLS) |
+| **Language** | TypeScript |
+| **Icons** | Lucide React |
+| **Font** | Inter (Google Fonts) |
 
----
+## 📋 Prerequisites
 
-## 📦 How to Clone and Run the Project
+- Node.js 18+ and npm
+- A Supabase account (free tier works)
+- Git
 
-<div align="center">
+## 🚀 Getting Started
 
-Follow these steps to set up **MedSync** on your local machine.
-
-</div>
-
-### 1️⃣ Clone the Repository
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/ardfaiyaz/medsync.git
 cd medsync
 ```
----
 
-## 2️⃣ Install Dependencies
+### 2. Install Dependencies
 
-Make sure Node.js (v18+) is installed.
-```
+```bash
 npm install
 ```
----
 
-## 3️⃣ Create .env.local File
+### 3. Set Up Supabase Database
 
-Inside the project root, create a file called .env.local and paste the following:
+1. Create a new project at [supabase.com](https://supabase.com)
+2. Go to SQL Editor in your Supabase dashboard
+3. Run the SQL files in this order:
+   - `database/schema.sql` - Main schema
+   - `database/add_email_to_profiles.sql` - Add email column (optional but recommended)
+4. Get your Supabase credentials from Settings → API
 
+### 4. Configure Environment Variables
+
+Create a `.env.local` file in the project root:
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
 ```
-NEXT_PUBLIC_SUPABASE_URL=https://lcejelqbjkmpruhmtlwf.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxjZWplbHFiamttcHJ1aG10bHdmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMyODE5NjQsImV4cCI6MjA3ODg1Nzk2NH0.SToiFsQXtu-ZNamZnNzTYhGmT9KOrCZhQY4IDCvpqkA
-SUPABASE_SERVICE_ROLE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxjZWplbHFiamttcHJ1aG10bHdmIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2MzI4MTk2NCwiZXhwIjoyMDc4ODU3OTY0fQ.ZfvPIAN4RbCBRk-N-gdowVxXWabgBFaobxj9FCVfbB4
-```
 
----
+### 5. Run the Development Server
 
-## 4️⃣ Run the Development Server
-```
+```bash
 npm run dev
 ```
 
----
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## 📁 Project Structure
 
 ```
 medsync/
-├── app/                        # Next.js App Router pages
-├── components/                 # React components
-├── lib/                        # Utility libraries
-│   └── supabase/               # Supabase clients
-│       ├── client.ts           # Client-side Supabase
-│       └── server.ts           # Server-side Supabase
-├── .env.local                  # Supabase environment variables
-├── package.json                # Dependencies
-├── next.config.ts              # Next.js config
-└── README.md                   # This file
+├── app/                          # Next.js App Router
+│   ├── api/                      # API routes
+│   │   ├── auth/                 # Authentication endpoints
+│   │   └── profile/              # Profile management
+│   ├── dashboard/                # Dashboard page
+│   ├── inventory/                # Inventory management
+│   ├── login/                    # Login page
+│   ├── signup/                   # Sign-up page
+│   ├── layout.tsx                # Root layout
+│   └── globals.css               # Global styles
+├── components/                   # React components
+│   └── Sidebar.tsx               # Navigation sidebar
+├── lib/                          # Utility libraries
+│   └── supabase/                 # Supabase clients
+│       ├── Client.ts             # Browser client
+│       ├── Server.ts             # Server client
+│       └── admin.ts              # Admin operations
+├── types/                        # TypeScript types
+│   └── database.ts               # Database type definitions
+├── database/                     # SQL scripts
+│   ├── schema.sql                # Main database schema
+│   ├── add_email_to_profiles.sql # Email column addition
+│   └── fix_*.sql                 # Database fixes
+└── public/                       # Static assets
 ```
 
+## 🗄️ Database Schema
+
+### Tables
+
+- **profiles**: User profiles with personal information and role (admin/staff)
+- **medicines**: Medicine inventory with details, quantities, and expiry dates
+- **activity_logs**: Audit trail of all user actions
+
+### Security
+
+- Row Level Security (RLS) enabled on all tables
+- Users can only access their own data
+- Admins have elevated permissions
+- Secure authentication via Supabase Auth
+
+## 🔐 Authentication
+
+- Email/password authentication
+- Automatic email confirmation (bypassed for development)
+- Session management with cookies
+- Protected routes with server-side authentication checks
+
+## 🎨 Design System
+
+- **Font**: Inter (regular for body, semibold for headings)
+- **Colors**: Teal primary, gray neutrals
+- **Icons**: Lucide React
+- **Animations**: Smooth fade-in, slide-up transitions
+- **Spacing**: Consistent padding and margins
+
+## 📦 Deployment
+
+### Vercel (Recommended)
+
+1. Push your code to GitHub
+2. Import your repository in Vercel
+3. Add environment variables in Vercel dashboard
+4. Deploy!
+
+### Environment Variables for Production
+
+Make sure to set these in your deployment platform:
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- `SUPABASE_SERVICE_ROLE_KEY`
+
+## 🧪 Testing
+
+1. Create a test account via `/signup`
+2. Add medicines via `/inventory`
+3. Check dashboard statistics
+4. Verify activity logs are being created
+
+## 📝 Key Features Implementation
+
+### Recent Updates
+- ✅ Inter font implementation for professional appearance
+- ✅ Icon-based UI with Lucide React
+- ✅ Email field in profiles table
+- ✅ Improved authentication flow with cookie-based sessions
+- ✅ Removed hover effects for cleaner interface
+- ✅ Larger, more readable UI elements
+- ✅ Streamlined sidebar (Dashboard & Inventory only)
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Submit a pull request
+
+## 📄 License
+
+This project is private and proprietary.
+
+## 🆘 Support
+
+For issues or questions:
+1. Check the database setup guide in `database/README.md`
+2. Review Supabase documentation
+3. Check Next.js documentation
+
+## 🙏 Acknowledgments
+
+- Built with Next.js and Supabase
+- Icons by Lucide
+- Font by Google Fonts (Inter)
