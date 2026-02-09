@@ -323,7 +323,7 @@ export default function InventoryContent({
       ),
     },
     {
-      key: "quantity" as keyof Medicine,
+      key: "low_stock_threshold" as keyof Medicine,
       label: "Status",
       sortable: false,
       render: (value: any, row: Medicine) => getStatusBadge(row),

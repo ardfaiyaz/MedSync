@@ -81,7 +81,7 @@ export default function SortableTable<T extends Record<string, any>>({
             <tr>
               {columns.map((column, index) => (
                 <th
-                  key={String(column.key)}
+                  key={`${String(column.key)}-${index}`}
                   className={`px-8 py-5 text-left text-base font-semibold text-gray-700 uppercase tracking-wider ${
                     column.sortable !== false ? "cursor-pointer hover:bg-gray-100" : ""
                   }`}

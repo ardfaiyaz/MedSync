@@ -6,7 +6,7 @@ import LoadingSpinner from "./LoadingSpinner";
 
 interface ButtonProps {
   children: ReactNode;
-  onClick?: () => void;
+  onClick?: (e?: React.MouseEvent<HTMLButtonElement>) => void;
   type?: "button" | "submit" | "reset";
   variant?: "primary" | "secondary" | "danger" | "ghost";
   size?: "sm" | "md" | "lg";
@@ -42,10 +42,16 @@ export default function Button({
     lg: "px-8 py-4 text-lg",
   };
 
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (onClick) {
+      onClick(e);
+    }
+  };
+
   return (
     <motion.button
       type={type}
-      onClick={onClick}
+      onClick={handleClick}
       disabled={disabled || loading}
       className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${fullWidth ? "w-full" : ""} ${className}`}
       whileHover={{ scale: disabled || loading ? 1 : 1.02 }}

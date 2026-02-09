@@ -70,17 +70,16 @@ export default function Sidebar({ activePage }: SidebarProps) {
       >
         <div className="flex items-center gap-3 mb-2 group cursor-pointer">
           <motion.div
-            className="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-lg relative overflow-hidden"
+            className="flex items-center justify-center"
             whileHover={{ scale: 1.1, rotate: 3 }}
             transition={{ type: "spring", stiffness: 300 }}
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-teal-600 to-teal-800 opacity-90" />
             <Image
               src="/logo.svg"
               alt="MedSync Logo"
-              width={32}
-              height={32}
-              className="relative z-10"
+              width={48}
+              height={48}
+              className="w-12 h-12"
             />
           </motion.div>
           <span className="text-white text-xl font-bold tracking-tight">MedSync</span>
