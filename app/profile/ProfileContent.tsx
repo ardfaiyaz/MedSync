@@ -185,37 +185,43 @@ export default function ProfileContent({ profile: initialProfile, userId }: Prof
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-gray-700 text-sm font-semibold mb-2">
+                  <label htmlFor="profile-first-name" className="block text-gray-700 text-sm font-semibold mb-2">
                     First Name
                   </label>
                   <input
+                    id="profile-first-name"
                     type="text"
                     value={formData.first_name}
                     onChange={(e) => setFormData({ ...formData, first_name: e.target.value })}
+                    placeholder="Enter first name"
                     className="w-full bg-gray-50 border-2 border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300"
                   />
                 </div>
                 <div>
-                  <label className="block text-gray-700 text-sm font-semibold mb-2">
+                  <label htmlFor="profile-last-name" className="block text-gray-700 text-sm font-semibold mb-2">
                     Last Name
                   </label>
                   <input
+                    id="profile-last-name"
                     type="text"
                     value={formData.last_name}
                     onChange={(e) => setFormData({ ...formData, last_name: e.target.value })}
+                    placeholder="Enter last name"
                     className="w-full bg-gray-50 border-2 border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-gray-700 text-sm font-semibold mb-2">
+                <label htmlFor="profile-phone" className="block text-gray-700 text-sm font-semibold mb-2">
                   Phone Number
                 </label>
                 <input
+                  id="profile-phone"
                   type="tel"
                   value={formData.phone_number}
                   onChange={(e) => setFormData({ ...formData, phone_number: e.target.value })}
+                  placeholder="Enter phone number"
                   className="w-full bg-gray-50 border-2 border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300"
                 />
               </div>
@@ -224,70 +230,82 @@ export default function ProfileContent({ profile: initialProfile, userId }: Prof
                 <h3 className="text-lg font-semibold text-gray-800 mb-4">Address</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-gray-700 text-sm font-semibold mb-2">
+                    <label htmlFor="profile-house-number" className="block text-gray-700 text-sm font-semibold mb-2">
                       House/Building No.
                     </label>
                     <input
+                      id="profile-house-number"
                       type="text"
                       value={formData.house_number}
                       onChange={(e) => setFormData({ ...formData, house_number: e.target.value })}
+                      placeholder="Enter house/building number"
                       className="w-full bg-gray-50 border-2 border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300"
                     />
                   </div>
                   <div>
-                    <label className="block text-gray-700 text-sm font-semibold mb-2">
+                    <label htmlFor="profile-street-name" className="block text-gray-700 text-sm font-semibold mb-2">
                       Street Name
                     </label>
                     <input
+                      id="profile-street-name"
                       type="text"
                       value={formData.street_name}
                       onChange={(e) => setFormData({ ...formData, street_name: e.target.value })}
+                      placeholder="Enter street name"
                       className="w-full bg-gray-50 border-2 border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300"
                     />
                   </div>
                 </div>
                 <div className="mt-4">
-                  <label className="block text-gray-700 text-sm font-semibold mb-2">
+                  <label htmlFor="profile-barangay" className="block text-gray-700 text-sm font-semibold mb-2">
                     Barangay
                   </label>
                   <input
+                    id="profile-barangay"
                     type="text"
                     value={formData.barangay}
                     onChange={(e) => setFormData({ ...formData, barangay: e.target.value })}
+                    placeholder="Enter barangay"
                     className="w-full bg-gray-50 border-2 border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300"
                   />
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
                   <div>
-                    <label className="block text-gray-700 text-sm font-semibold mb-2">
+                    <label htmlFor="profile-city" className="block text-gray-700 text-sm font-semibold mb-2">
                       City/Municipality
                     </label>
                     <input
+                      id="profile-city"
                       type="text"
                       value={formData.city}
                       onChange={(e) => setFormData({ ...formData, city: e.target.value })}
+                      placeholder="Enter city"
                       className="w-full bg-gray-50 border-2 border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300"
                     />
                   </div>
                   <div>
-                    <label className="block text-gray-700 text-sm font-semibold mb-2">
+                    <label htmlFor="profile-province" className="block text-gray-700 text-sm font-semibold mb-2">
                       Province
                     </label>
                     <input
+                      id="profile-province"
                       type="text"
                       value={formData.province}
                       onChange={(e) => setFormData({ ...formData, province: e.target.value })}
+                      placeholder="Enter province"
                       className="w-full bg-gray-50 border-2 border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300"
                     />
                   </div>
                   <div>
-                    <label className="block text-gray-700 text-sm font-semibold mb-2">
+                    <label htmlFor="profile-postal-code" className="block text-gray-700 text-sm font-semibold mb-2">
                       Postal Code
                     </label>
                     <input
+                      id="profile-postal-code"
                       type="text"
                       value={formData.postal_code}
                       onChange={(e) => setFormData({ ...formData, postal_code: e.target.value })}
+                      placeholder="Enter postal code"
                       className="w-full bg-gray-50 border-2 border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300"
                     />
                   </div>
@@ -295,28 +313,32 @@ export default function ProfileContent({ profile: initialProfile, userId }: Prof
               </div>
 
               <div>
-                <label className="block text-gray-700 text-sm font-semibold mb-2">
+                <label htmlFor="profile-birthday" className="block text-gray-700 text-sm font-semibold mb-2">
                   Birthday
                 </label>
                 <input
+                  id="profile-birthday"
                   type="date"
                   value={formData.birthday}
                   onChange={(e) => setFormData({ ...formData, birthday: e.target.value })}
+                  placeholder="Select birthday"
                   className="w-full bg-gray-50 border-2 border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300"
                 />
               </div>
 
               <div>
-                <label className="block text-gray-700 text-sm font-semibold mb-2">
+                <label htmlFor="profile-license" className="block text-gray-700 text-sm font-semibold mb-2">
                   License Upload
                 </label>
                 <div className="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center hover:border-teal-600 transition cursor-pointer relative">
                   <input
+                    id="profile-license"
                     type="file"
                     accept=".jpg,.jpeg,.png,.pdf"
                     onChange={handleFileUpload}
                     className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                     disabled={uploading}
+                    aria-label="Upload license file"
                   />
                   <Upload className="w-12 h-12 text-gray-400 mx-auto mb-2" />
                   <p className="text-gray-700 font-medium mb-1">
