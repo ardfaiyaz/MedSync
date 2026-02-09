@@ -338,9 +338,10 @@ export default function InventoryContent({
             variant="ghost"
             size="sm"
             onClick={(e) => {
-              e.stopPropagation();
+              e?.stopPropagation();
               openEditModal(row);
             }}
+            aria-label={`Edit ${row.name}`}
           >
             <Edit className="w-4 h-4" />
             Edit
@@ -349,10 +350,11 @@ export default function InventoryContent({
             variant="danger"
             size="sm"
             onClick={(e) => {
-              e.stopPropagation();
+              e?.stopPropagation();
               handleDeleteClick(row);
             }}
             disabled={loading}
+            aria-label={`Delete ${row.name}`}
           >
             <Trash2 className="w-4 h-4" />
             Delete
@@ -474,6 +476,8 @@ export default function InventoryContent({
                     onClick={closeModal}
                     className="text-gray-400 hover:text-gray-600 transition-colors"
                     disabled={loading}
+                    aria-label="Close modal"
+                    title="Close modal"
                   >
                     <X className="w-8 h-8" />
                   </button>
@@ -488,54 +492,61 @@ export default function InventoryContent({
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <label className="block text-gray-700 text-base font-semibold mb-3">
+                      <label htmlFor="medicine-name" className="block text-gray-700 text-base font-semibold mb-3">
                         Name *
                       </label>
                       <input
+                        id="medicine-name"
                         type="text"
                         value={formData.name}
                         onChange={(e) =>
                           setFormData({ ...formData, name: e.target.value })
                         }
                         required
+                        placeholder="Enter medicine name"
                         className="w-full bg-gray-50 border-2 border-gray-200 rounded-2xl px-5 py-4 text-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300"
                       />
                     </div>
                     <div>
-                      <label className="block text-gray-700 text-base font-semibold mb-3">
+                      <label htmlFor="medicine-category" className="block text-gray-700 text-base font-semibold mb-3">
                         Category
                       </label>
                       <input
+                        id="medicine-category"
                         type="text"
                         value={formData.category}
                         onChange={(e) =>
                           setFormData({ ...formData, category: e.target.value })
                         }
+                        placeholder="Enter category"
                         className="w-full bg-gray-50 border-2 border-gray-200 rounded-2xl px-5 py-4 text-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-gray-700 text-base font-semibold mb-3">
+                    <label htmlFor="medicine-description" className="block text-gray-700 text-base font-semibold mb-3">
                       Description
                     </label>
                     <textarea
+                      id="medicine-description"
                       value={formData.description}
                       onChange={(e) =>
                         setFormData({ ...formData, description: e.target.value })
                       }
                       rows={4}
+                      placeholder="Enter description"
                       className="w-full bg-gray-50 border-2 border-gray-200 rounded-2xl px-5 py-4 text-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300"
                     />
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div>
-                      <label className="block text-gray-700 text-base font-semibold mb-3">
+                      <label htmlFor="medicine-quantity" className="block text-gray-700 text-base font-semibold mb-3">
                         Quantity *
                       </label>
                       <input
+                        id="medicine-quantity"
                         type="number"
                         value={formData.quantity}
                         onChange={(e) =>
@@ -546,27 +557,31 @@ export default function InventoryContent({
                         }
                         required
                         min="0"
+                        placeholder="0"
                         className="w-full bg-gray-50 border-2 border-gray-200 rounded-2xl px-5 py-4 text-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300"
                       />
                     </div>
                     <div>
-                      <label className="block text-gray-700 text-base font-semibold mb-3">
+                      <label htmlFor="medicine-unit" className="block text-gray-700 text-base font-semibold mb-3">
                         Unit
                       </label>
                       <input
+                        id="medicine-unit"
                         type="text"
                         value={formData.unit}
                         onChange={(e) =>
                           setFormData({ ...formData, unit: e.target.value })
                         }
+                        placeholder="pieces"
                         className="w-full bg-gray-50 border-2 border-gray-200 rounded-2xl px-5 py-4 text-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300"
                       />
                     </div>
                     <div>
-                      <label className="block text-gray-700 text-base font-semibold mb-3">
+                      <label htmlFor="medicine-threshold" className="block text-gray-700 text-base font-semibold mb-3">
                         Low Stock Threshold
                       </label>
                       <input
+                        id="medicine-threshold"
                         type="number"
                         value={formData.low_stock_threshold}
                         onChange={(e) =>
@@ -576,6 +591,7 @@ export default function InventoryContent({
                           })
                         }
                         min="0"
+                        placeholder="10"
                         className="w-full bg-gray-50 border-2 border-gray-200 rounded-2xl px-5 py-4 text-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300"
                       />
                     </div>
@@ -583,23 +599,26 @@ export default function InventoryContent({
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <label className="block text-gray-700 text-base font-semibold mb-3">
+                      <label htmlFor="medicine-expiry" className="block text-gray-700 text-base font-semibold mb-3">
                         Expiry Date
                       </label>
                       <input
+                        id="medicine-expiry"
                         type="date"
                         value={formData.expiry_date}
                         onChange={(e) =>
                           setFormData({ ...formData, expiry_date: e.target.value })
                         }
+                        placeholder="Select expiry date"
                         className="w-full bg-gray-50 border-2 border-gray-200 rounded-2xl px-5 py-4 text-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300"
                       />
                     </div>
                     <div>
-                      <label className="block text-gray-700 text-base font-semibold mb-3">
+                      <label htmlFor="medicine-price" className="block text-gray-700 text-base font-semibold mb-3">
                         Price
                       </label>
                       <input
+                        id="medicine-price"
                         type="number"
                         step="0.01"
                         value={formData.price}
@@ -610,6 +629,7 @@ export default function InventoryContent({
                           })
                         }
                         min="0"
+                        placeholder="0.00"
                         className="w-full bg-gray-50 border-2 border-gray-200 rounded-2xl px-5 py-4 text-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300"
                       />
                     </div>
@@ -617,23 +637,26 @@ export default function InventoryContent({
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <label className="block text-gray-700 text-base font-semibold mb-3">
+                      <label htmlFor="medicine-supplier" className="block text-gray-700 text-base font-semibold mb-3">
                         Supplier
                       </label>
                       <input
+                        id="medicine-supplier"
                         type="text"
                         value={formData.supplier}
                         onChange={(e) =>
                           setFormData({ ...formData, supplier: e.target.value })
                         }
+                        placeholder="Enter supplier name"
                         className="w-full bg-gray-50 border-2 border-gray-200 rounded-2xl px-5 py-4 text-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300"
                       />
                     </div>
                     <div>
-                      <label className="block text-gray-700 text-base font-semibold mb-3">
+                      <label htmlFor="medicine-batch" className="block text-gray-700 text-base font-semibold mb-3">
                         Batch Number
                       </label>
                       <input
+                        id="medicine-batch"
                         type="text"
                         value={formData.batch_number}
                         onChange={(e) =>
@@ -642,6 +665,7 @@ export default function InventoryContent({
                             batch_number: e.target.value,
                           })
                         }
+                        placeholder="Enter batch number"
                         className="w-full bg-gray-50 border-2 border-gray-200 rounded-2xl px-5 py-4 text-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300"
                       />
                     </div>

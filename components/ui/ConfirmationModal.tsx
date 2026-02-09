@@ -70,6 +70,8 @@ export default function ConfirmationModal({
                   onClick={onClose}
                   className="text-gray-400 hover:text-gray-600 transition-colors"
                   disabled={loading}
+                  aria-label="Close confirmation dialog"
+                  title="Close"
                 >
                   <X className="w-6 h-6" />
                 </button>
