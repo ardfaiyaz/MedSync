@@ -45,17 +45,18 @@ export default function ConfirmationModal({
             onClick={onClose}
           />
           <motion.div
-            className="fixed inset-0 flex items-center justify-center z-50 p-4"
+            className="fixed inset-0 flex items-center justify-center z-50 p-4 pointer-events-none"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
             <motion.div
-              className="bg-white rounded-3xl shadow-2xl max-w-md w-full p-8 border border-gray-100"
+              className="bg-white rounded-3xl shadow-2xl max-w-md w-full p-8 border border-gray-100 pointer-events-auto"
               initial={{ scale: 0.9, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 20 }}
               transition={{ type: "spring", duration: 0.3 }}
+              onClick={(e) => e.stopPropagation()}
             >
               <div className="flex items-start gap-4 mb-6">
                 <div className={`${variants[variant]} flex-shrink-0`}>
