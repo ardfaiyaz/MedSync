@@ -194,26 +194,26 @@ export default function SignUpPage() {
         </div>
 
         {/* Sign Up Card */}
-        <div className="bg-white rounded-3xl shadow-2xl p-8 backdrop-blur-sm border border-white/50 animate-slideUp delay-300 hover:shadow-teal-500/10 transition-all duration-300">
+        <div className="bg-white rounded-2xl md:rounded-3xl shadow-2xl p-4 md:p-6 lg:p-8 backdrop-blur-sm border border-white/50 animate-slideUp delay-300 hover:shadow-teal-500/10 transition-all duration-300">
           {/* Header */}
-          <div className="mb-6 animate-fadeIn delay-400">
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-teal-600 to-teal-800 bg-clip-text text-transparent mb-2">
+          <div className="mb-4 md:mb-6 animate-fadeIn delay-400">
+            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-teal-600 to-teal-800 bg-clip-text text-transparent mb-2">
               Create Account
             </h1>
-            <p className="text-gray-600 font-light">
+            <p className="text-gray-600 text-sm md:text-base font-light">
               Join the MedSync Community Today
             </p>
           </div>
 
           {/* Tabs */}
-          <div className="flex gap-3 mb-6">
+          <div className="flex flex-col sm:flex-row gap-2 md:gap-3 mb-4 md:mb-6">
             <Link href="/login" className="flex-1">
-              <Button variant="secondary" fullWidth>
+              <Button variant="secondary" fullWidth size="md">
                 Sign In
               </Button>
             </Link>
             <Link href="/signup" className="flex-1">
-              <Button variant="primary" fullWidth>
+              <Button variant="primary" fullWidth size="md">
                 Sign Up
               </Button>
             </Link>
@@ -221,15 +221,15 @@ export default function SignUpPage() {
 
           {/* Error Message */}
           {error && (
-            <div className="mb-4 p-4 bg-red-50 border-l-4 border-red-500 text-red-700 rounded-lg text-sm animate-shake shadow-md">
+            <div className="mb-4 p-3 md:p-4 bg-red-50 border-l-4 border-red-500 text-red-700 rounded-lg text-xs md:text-sm animate-shake shadow-md">
               {error}
             </div>
           )}
 
           {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
             {/* Personal Information */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
               <div>
                 <label className="block text-gray-700 text-sm font-medium mb-2">
                   First Name
@@ -240,7 +240,7 @@ export default function SignUpPage() {
                   value={formData.firstName}
                   onChange={handleChange}
                   required
-                  className="w-full bg-gray-50 border-2 border-gray-200 rounded-xl px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 hover:border-gray-300"
+                  className="w-full bg-gray-50 border-2 border-gray-200 rounded-xl px-3 md:px-4 py-2.5 md:py-3.5 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 hover:border-gray-300"
                   placeholder="Enter first name"
                 />
               </div>
@@ -254,7 +254,7 @@ export default function SignUpPage() {
                   value={formData.lastName}
                   onChange={handleChange}
                   required
-                  className="w-full bg-gray-50 border-2 border-gray-200 rounded-xl px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 hover:border-gray-300"
+                  className="w-full bg-gray-50 border-2 border-gray-200 rounded-xl px-3 md:px-4 py-2.5 md:py-3.5 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 hover:border-gray-300"
                   placeholder="Enter last name"
                 />
               </div>
@@ -361,10 +361,10 @@ export default function SignUpPage() {
 
             {/* Full Address Section */}
             <div>
-              <h3 className="text-lg font-semibold text-gray-800 mb-4">
+              <h3 className="text-base md:text-lg font-semibold text-gray-800 mb-3 md:mb-4">
                 Full Address
               </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
                 <div>
                   <label className="block text-gray-700 text-sm font-medium mb-2">
                     House/Building No.
@@ -374,7 +374,7 @@ export default function SignUpPage() {
                     name="houseNumber"
                     value={formData.houseNumber}
                     onChange={handleChange}
-                    className="w-full bg-gray-50 border-2 border-gray-200 rounded-xl px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 hover:border-gray-300"
+                    className="w-full bg-gray-50 border-2 border-gray-200 rounded-xl px-3 md:px-4 py-2.5 md:py-3.5 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 hover:border-gray-300"
                     placeholder="Enter house/building number"
                   />
                 </div>
@@ -387,7 +387,7 @@ export default function SignUpPage() {
                     name="streetName"
                     value={formData.streetName}
                     onChange={handleChange}
-                    className="w-full bg-gray-50 border-2 border-gray-200 rounded-xl px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 hover:border-gray-300"
+                    className="w-full bg-gray-50 border-2 border-gray-200 rounded-xl px-3 md:px-4 py-2.5 md:py-3.5 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 hover:border-gray-300"
                     placeholder="Enter street name"
                   />
                 </div>
@@ -401,11 +401,11 @@ export default function SignUpPage() {
                   name="barangay"
                   value={formData.barangay}
                   onChange={handleChange}
-                  className="w-full bg-gray-50 border-2 border-gray-200 rounded-xl px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 hover:border-gray-300"
+                  className="w-full bg-gray-50 border-2 border-gray-200 rounded-xl px-3 md:px-4 py-2.5 md:py-3.5 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 hover:border-gray-300"
                   placeholder="Enter barangay"
                 />
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 mt-3 md:mt-4">
                 <div>
                   <label className="block text-gray-700 text-sm font-medium mb-2">
                     City/Municipality
@@ -415,7 +415,7 @@ export default function SignUpPage() {
                     name="city"
                     value={formData.city}
                     onChange={handleChange}
-                    className="w-full bg-gray-50 border-2 border-gray-200 rounded-xl px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 hover:border-gray-300"
+                    className="w-full bg-gray-50 border-2 border-gray-200 rounded-xl px-3 md:px-4 py-2.5 md:py-3.5 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 hover:border-gray-300"
                     placeholder="Enter city"
                   />
                 </div>
@@ -428,7 +428,7 @@ export default function SignUpPage() {
                     name="province"
                     value={formData.province}
                     onChange={handleChange}
-                    className="w-full bg-gray-50 border-2 border-gray-200 rounded-xl px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 hover:border-gray-300"
+                    className="w-full bg-gray-50 border-2 border-gray-200 rounded-xl px-3 md:px-4 py-2.5 md:py-3.5 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 hover:border-gray-300"
                     placeholder="Enter province"
                   />
                 </div>
@@ -441,7 +441,7 @@ export default function SignUpPage() {
                     name="postalCode"
                     value={formData.postalCode}
                     onChange={handleChange}
-                    className="w-full bg-gray-50 border-2 border-gray-200 rounded-xl px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 hover:border-gray-300"
+                    className="w-full bg-gray-50 border-2 border-gray-200 rounded-xl px-3 md:px-4 py-2.5 md:py-3.5 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 hover:border-gray-300"
                     placeholder="Enter postal code"
                   />
                 </div>
@@ -450,10 +450,10 @@ export default function SignUpPage() {
 
             {/* Birthday Section */}
             <div>
-              <h3 className="text-lg font-semibold text-gray-800 mb-4">
+              <h3 className="text-base md:text-lg font-semibold text-gray-800 mb-3 md:mb-4">
                 Birthday
               </h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="grid grid-cols-3 gap-3 md:gap-4">
                 <div>
                   <label className="block text-gray-700 text-sm font-medium mb-2">
                     Month
@@ -464,7 +464,7 @@ export default function SignUpPage() {
                     value={formData.month}
                     onChange={handleChange}
                     maxLength={2}
-                    className="w-full bg-gray-50 border-2 border-gray-200 rounded-xl px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 hover:border-gray-300"
+                    className="w-full bg-gray-50 border-2 border-gray-200 rounded-xl px-3 md:px-4 py-2.5 md:py-3.5 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 hover:border-gray-300"
                     placeholder="MM"
                   />
                 </div>
@@ -478,7 +478,7 @@ export default function SignUpPage() {
                     value={formData.day}
                     onChange={handleChange}
                     maxLength={2}
-                    className="w-full bg-gray-50 border-2 border-gray-200 rounded-xl px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 hover:border-gray-300"
+                    className="w-full bg-gray-50 border-2 border-gray-200 rounded-xl px-3 md:px-4 py-2.5 md:py-3.5 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 hover:border-gray-300"
                     placeholder="DD"
                   />
                 </div>
@@ -492,7 +492,7 @@ export default function SignUpPage() {
                     value={formData.year}
                     onChange={handleChange}
                     maxLength={4}
-                    className="w-full bg-gray-50 border-2 border-gray-200 rounded-xl px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 hover:border-gray-300"
+                    className="w-full bg-gray-50 border-2 border-gray-200 rounded-xl px-3 md:px-4 py-2.5 md:py-3.5 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 hover:border-gray-300"
                     placeholder="YYYY"
                   />
                 </div>

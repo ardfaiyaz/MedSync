@@ -51,32 +51,32 @@ export default function ConfirmationModal({
             exit={{ opacity: 0 }}
           >
             <motion.div
-              className="bg-white rounded-3xl shadow-2xl max-w-md w-full p-8 border border-gray-100 pointer-events-auto"
+              className="bg-white rounded-2xl md:rounded-3xl shadow-2xl max-w-md w-full p-4 md:p-6 lg:p-8 border border-gray-100 pointer-events-auto mx-4"
               initial={{ scale: 0.9, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 20 }}
               transition={{ type: "spring", duration: 0.3 }}
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="flex items-start gap-4 mb-6">
+              <div className="flex items-start gap-3 md:gap-4 mb-4 md:mb-6">
                 <div className={`${variants[variant]} flex-shrink-0`}>
-                  <AlertTriangle className="w-8 h-8" />
+                  <AlertTriangle className="w-6 h-6 md:w-8 md:h-8" />
                 </div>
-                <div className="flex-1">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">{title}</h3>
-                  <p className="text-gray-600">{message}</p>
+                <div className="flex-1 min-w-0">
+                  <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-1 md:mb-2">{title}</h3>
+                  <p className="text-gray-600 text-sm md:text-base">{message}</p>
                 </div>
                 <button
                   onClick={onClose}
-                  className="text-gray-400 hover:text-gray-600 transition-colors"
+                  className="text-gray-400 hover:text-gray-600 transition-colors flex-shrink-0"
                   disabled={loading}
                   aria-label="Close confirmation dialog"
                   title="Close"
                 >
-                  <X className="w-6 h-6" />
+                  <X className="w-5 h-5 md:w-6 md:h-6" />
                 </button>
               </div>
-              <div className="flex gap-4 justify-end">
+              <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-end">
                 <Button
                   variant="secondary"
                   onClick={onClose}

@@ -122,9 +122,9 @@ export default function ProfileContent({ profile: initialProfile, userId }: Prof
     <div className="flex min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
       <Sidebar activePage="profile" />
 
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 flex flex-col md:ml-0">
         <motion.div
-          className="text-gray-400 text-sm px-8 pt-4"
+          className="text-gray-400 text-xs md:text-sm px-4 md:px-8 pt-16 md:pt-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.1 }}
@@ -133,27 +133,27 @@ export default function ProfileContent({ profile: initialProfile, userId }: Prof
         </motion.div>
 
         <motion.div
-          className="bg-white/80 backdrop-blur-sm px-10 py-8 border-b border-gray-200/50 shadow-sm"
+          className="bg-white/80 backdrop-blur-sm px-4 md:px-10 py-4 md:py-8 border-b border-gray-200/50 shadow-sm"
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.2 }}
         >
-          <div className="flex items-center gap-4">
-            <div className="w-16 h-16 bg-gradient-to-br from-teal-600 to-teal-700 rounded-full flex items-center justify-center shadow-lg">
-              <User className="w-8 h-8 text-white" />
+          <div className="flex items-center gap-3 md:gap-4">
+            <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-teal-600 to-teal-700 rounded-full flex items-center justify-center shadow-lg flex-shrink-0">
+              <User className="w-6 h-6 md:w-8 md:h-8 text-white" />
             </div>
             <div>
-              <h1 className="text-5xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
+              <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
                 Profile Settings
               </h1>
-              <p className="text-gray-600 mt-2 text-lg font-light">Manage your account information</p>
+              <p className="text-gray-600 mt-1 md:mt-2 text-sm md:text-lg font-light">Manage your account information</p>
             </div>
           </div>
         </motion.div>
 
-        <div className="flex-1 p-10">
+        <div className="flex-1 p-4 md:p-6 lg:p-10">
           <motion.div
-            className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-lg p-8 border border-gray-100 max-w-4xl"
+            className="bg-white/80 backdrop-blur-sm rounded-2xl md:rounded-3xl shadow-lg p-4 md:p-6 lg:p-8 border border-gray-100 max-w-4xl"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
@@ -359,14 +359,15 @@ export default function ProfileContent({ profile: initialProfile, userId }: Prof
                 </div>
               </div>
 
-              <div className="flex justify-end gap-4 pt-4">
+              <div className="flex justify-end gap-3 md:gap-4 pt-4">
                 <Button
                   type="submit"
                   loading={loading}
-                  size="lg"
+                  size="md"
+                  className="w-full sm:w-auto"
                 >
-                  <Save className="w-5 h-5" />
-                  Save Changes
+                  <Save className="w-4 h-4 md:w-5 md:h-5" />
+                  <span className="text-sm md:text-base">Save Changes</span>
                 </Button>
               </div>
             </form>

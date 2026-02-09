@@ -286,9 +286,9 @@ export default function InventoryContent({
       sortable: true,
       render: (value: any, row: Medicine) => (
         <div>
-          <div className="text-base font-semibold text-gray-900">{row.name}</div>
+          <div className="text-sm md:text-base font-semibold text-gray-900">{row.name}</div>
           {row.description && (
-            <div className="text-sm text-gray-500 mt-1">
+            <div className="text-xs md:text-sm text-gray-500 mt-1 hidden md:block">
               {row.description.substring(0, 50)}
               {row.description.length > 50 ? "..." : ""}
             </div>
@@ -300,14 +300,14 @@ export default function InventoryContent({
       key: "category" as keyof Medicine,
       label: "Category",
       sortable: true,
-      render: (value: any) => <div className="text-base text-gray-900">{value || "N/A"}</div>,
+      render: (value: any) => <div className="text-sm md:text-base text-gray-900">{value || "N/A"}</div>,
     },
     {
       key: "quantity" as keyof Medicine,
       label: "Quantity",
       sortable: true,
       render: (value: any, row: Medicine) => (
-        <div className="text-base text-gray-900 font-medium">
+        <div className="text-sm md:text-base text-gray-900 font-medium">
           {value} {row.unit}
         </div>
       ),
@@ -317,7 +317,7 @@ export default function InventoryContent({
       label: "Expiry Date",
       sortable: true,
       render: (value: any) => (
-        <div className="text-base text-gray-900">
+        <div className="text-sm md:text-base text-gray-900">
           {value ? new Date(value).toLocaleDateString() : "N/A"}
         </div>
       ),
@@ -333,7 +333,7 @@ export default function InventoryContent({
       label: "Actions",
       sortable: false,
       render: (value: any, row: Medicine) => (
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 md:gap-4">
           <Button
             variant="ghost"
             size="sm"
@@ -342,9 +342,10 @@ export default function InventoryContent({
               openEditModal(row);
             }}
             aria-label={`Edit ${row.name}`}
+            className="text-xs md:text-sm"
           >
-            <Edit className="w-4 h-4" />
-            Edit
+            <Edit className="w-3 h-3 md:w-4 md:h-4" />
+            <span className="hidden sm:inline">Edit</span>
           </Button>
           <Button
             variant="danger"
@@ -355,9 +356,10 @@ export default function InventoryContent({
             }}
             disabled={loading}
             aria-label={`Delete ${row.name}`}
+            className="text-xs md:text-sm"
           >
-            <Trash2 className="w-4 h-4" />
-            Delete
+            <Trash2 className="w-3 h-3 md:w-4 md:h-4" />
+            <span className="hidden sm:inline">Delete</span>
           </Button>
         </div>
       ),
@@ -368,9 +370,9 @@ export default function InventoryContent({
     <div className="flex min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
       <Sidebar activePage="inventory" />
 
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 flex flex-col md:ml-0">
         <motion.div
-          className="text-gray-400 text-sm px-8 pt-4"
+          className="text-gray-400 text-xs md:text-sm px-4 md:px-8 pt-16 md:pt-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.1 }}
@@ -379,28 +381,28 @@ export default function InventoryContent({
         </motion.div>
 
         <motion.div
-          className="bg-white/80 backdrop-blur-sm px-10 py-8 border-b border-gray-200/50 shadow-sm"
+          className="bg-white/80 backdrop-blur-sm px-4 md:px-10 py-4 md:py-8 border-b border-gray-200/50 shadow-sm"
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.2 }}
         >
-          <div className="flex justify-between items-center">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <div>
-              <h1 className="text-5xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
+              <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
                 Inventory Overview
               </h1>
-              <p className="text-gray-600 mt-2 text-lg font-light">Welcome back, {userName}</p>
+              <p className="text-gray-600 mt-1 md:mt-2 text-sm md:text-lg font-light">Welcome back, {userName}</p>
             </div>
-            <Button onClick={openAddModal} size="lg">
-              <Plus className="w-6 h-6" />
-              Add Medicine
+            <Button onClick={openAddModal} size="md" className="w-full sm:w-auto">
+              <Plus className="w-4 h-4 md:w-6 md:h-6" />
+              <span className="text-sm md:text-base">Add Medicine</span>
             </Button>
           </div>
         </motion.div>
 
-        <div className="flex-1 p-10">
+        <div className="flex-1 p-4 md:p-6 lg:p-10">
           <motion.div
-            className="mb-8"
+            className="mb-4 md:mb-8"
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.3 }}
@@ -410,10 +412,10 @@ export default function InventoryContent({
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search medicines by name, category, or description..."
-                className="w-full bg-white border-2 border-gray-200 rounded-2xl px-6 py-5 pl-16 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 shadow-md text-lg"
+                placeholder="Search medicines..."
+                className="w-full bg-white border-2 border-gray-200 rounded-xl md:rounded-2xl px-4 md:px-6 py-3 md:py-5 pl-10 md:pl-16 text-sm md:text-base lg:text-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 shadow-md"
               />
-              <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-gray-400 w-6 h-6" />
+              <Search className="absolute left-3 md:left-6 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4 md:w-6 md:h-6" />
             </div>
           </motion.div>
 
@@ -438,9 +440,9 @@ export default function InventoryContent({
             {filteredMedicines.length > 0 ? (
               <SortableTable data={filteredMedicines} columns={tableColumns} />
             ) : (
-              <div className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-lg p-16 text-center border border-gray-100">
-                <Package className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-                <p className="text-gray-400 text-lg">
+              <div className="bg-white/80 backdrop-blur-sm rounded-2xl md:rounded-3xl shadow-lg p-8 md:p-16 text-center border border-gray-100">
+                <Package className="w-12 h-12 md:w-16 md:h-16 text-gray-400 mx-auto mb-3 md:mb-4" />
+                <p className="text-gray-400 text-sm md:text-base lg:text-lg">
                   {searchQuery
                     ? "No medicines found matching your search"
                     : "No medicines in inventory. Add your first medicine!"}
@@ -461,38 +463,38 @@ export default function InventoryContent({
             onClick={closeModal}
           >
             <motion.div
-              className="bg-white rounded-3xl shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto border border-gray-100"
+              className="bg-white rounded-2xl md:rounded-3xl shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto border border-gray-100"
               initial={{ scale: 0.9, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 20 }}
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="p-8">
-                <div className="flex justify-between items-center mb-8">
-                  <h2 className="text-4xl font-bold text-gray-800">
+              <div className="p-4 md:p-6 lg:p-8">
+                <div className="flex justify-between items-center mb-4 md:mb-6 lg:mb-8">
+                  <h2 className="text-xl md:text-3xl lg:text-4xl font-bold text-gray-800">
                     {editingMedicine ? "Edit Medicine" : "Add New Medicine"}
                   </h2>
                   <button
                     onClick={closeModal}
-                    className="text-gray-400 hover:text-gray-600 transition-colors"
+                    className="text-gray-400 hover:text-gray-600 transition-colors flex-shrink-0"
                     disabled={loading}
                     aria-label="Close modal"
                     title="Close modal"
                   >
-                    <X className="w-8 h-8" />
+                    <X className="w-6 h-6 md:w-8 md:h-8" />
                   </button>
                 </div>
 
                 {error && (
-                  <div className="mb-6 p-4 bg-red-100 border border-red-400 text-red-700 rounded-xl text-base">
+                  <div className="mb-4 md:mb-6 p-3 md:p-4 bg-red-100 border border-red-400 text-red-700 rounded-xl text-sm md:text-base">
                     {error}
                   </div>
                 )}
 
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                     <div>
-                      <label htmlFor="medicine-name" className="block text-gray-700 text-base font-semibold mb-3">
+                      <label htmlFor="medicine-name" className="block text-gray-700 text-sm md:text-base font-semibold mb-2 md:mb-3">
                         Name *
                       </label>
                       <input
@@ -504,11 +506,11 @@ export default function InventoryContent({
                         }
                         required
                         placeholder="Enter medicine name"
-                        className="w-full bg-gray-50 border-2 border-gray-200 rounded-2xl px-5 py-4 text-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300"
+                        className="w-full bg-gray-50 border-2 border-gray-200 rounded-xl md:rounded-2xl px-3 md:px-5 py-2.5 md:py-4 text-sm md:text-base lg:text-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300"
                       />
                     </div>
                     <div>
-                      <label htmlFor="medicine-category" className="block text-gray-700 text-base font-semibold mb-3">
+                      <label htmlFor="medicine-category" className="block text-gray-700 text-sm md:text-base font-semibold mb-2 md:mb-3">
                         Category
                       </label>
                       <input
@@ -519,13 +521,13 @@ export default function InventoryContent({
                           setFormData({ ...formData, category: e.target.value })
                         }
                         placeholder="Enter category"
-                        className="w-full bg-gray-50 border-2 border-gray-200 rounded-2xl px-5 py-4 text-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300"
+                        className="w-full bg-gray-50 border-2 border-gray-200 rounded-xl md:rounded-2xl px-3 md:px-5 py-2.5 md:py-4 text-sm md:text-base lg:text-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label htmlFor="medicine-description" className="block text-gray-700 text-base font-semibold mb-3">
+                    <label htmlFor="medicine-description" className="block text-gray-700 text-sm md:text-base font-semibold mb-2 md:mb-3">
                       Description
                     </label>
                     <textarea
@@ -536,13 +538,13 @@ export default function InventoryContent({
                       }
                       rows={4}
                       placeholder="Enter description"
-                      className="w-full bg-gray-50 border-2 border-gray-200 rounded-2xl px-5 py-4 text-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300"
+                      className="w-full bg-gray-50 border-2 border-gray-200 rounded-xl md:rounded-2xl px-3 md:px-5 py-2.5 md:py-4 text-sm md:text-base lg:text-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300"
                     />
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
                     <div>
-                      <label htmlFor="medicine-quantity" className="block text-gray-700 text-base font-semibold mb-3">
+                      <label htmlFor="medicine-quantity" className="block text-gray-700 text-sm md:text-base font-semibold mb-2 md:mb-3">
                         Quantity *
                       </label>
                       <input
@@ -558,11 +560,11 @@ export default function InventoryContent({
                         required
                         min="0"
                         placeholder="0"
-                        className="w-full bg-gray-50 border-2 border-gray-200 rounded-2xl px-5 py-4 text-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300"
+                        className="w-full bg-gray-50 border-2 border-gray-200 rounded-xl md:rounded-2xl px-3 md:px-5 py-2.5 md:py-4 text-sm md:text-base lg:text-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300"
                       />
                     </div>
                     <div>
-                      <label htmlFor="medicine-unit" className="block text-gray-700 text-base font-semibold mb-3">
+                      <label htmlFor="medicine-unit" className="block text-gray-700 text-sm md:text-base font-semibold mb-2 md:mb-3">
                         Unit
                       </label>
                       <input
@@ -573,11 +575,11 @@ export default function InventoryContent({
                           setFormData({ ...formData, unit: e.target.value })
                         }
                         placeholder="pieces"
-                        className="w-full bg-gray-50 border-2 border-gray-200 rounded-2xl px-5 py-4 text-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300"
+                        className="w-full bg-gray-50 border-2 border-gray-200 rounded-xl md:rounded-2xl px-3 md:px-5 py-2.5 md:py-4 text-sm md:text-base lg:text-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300"
                       />
                     </div>
                     <div>
-                      <label htmlFor="medicine-threshold" className="block text-gray-700 text-base font-semibold mb-3">
+                      <label htmlFor="medicine-threshold" className="block text-gray-700 text-sm md:text-base font-semibold mb-2 md:mb-3">
                         Low Stock Threshold
                       </label>
                       <input
@@ -592,14 +594,14 @@ export default function InventoryContent({
                         }
                         min="0"
                         placeholder="10"
-                        className="w-full bg-gray-50 border-2 border-gray-200 rounded-2xl px-5 py-4 text-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300"
+                        className="w-full bg-gray-50 border-2 border-gray-200 rounded-xl md:rounded-2xl px-3 md:px-5 py-2.5 md:py-4 text-sm md:text-base lg:text-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300"
                       />
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                     <div>
-                      <label htmlFor="medicine-expiry" className="block text-gray-700 text-base font-semibold mb-3">
+                      <label htmlFor="medicine-expiry" className="block text-gray-700 text-sm md:text-base font-semibold mb-2 md:mb-3">
                         Expiry Date
                       </label>
                       <input
@@ -610,11 +612,11 @@ export default function InventoryContent({
                           setFormData({ ...formData, expiry_date: e.target.value })
                         }
                         placeholder="Select expiry date"
-                        className="w-full bg-gray-50 border-2 border-gray-200 rounded-2xl px-5 py-4 text-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300"
+                        className="w-full bg-gray-50 border-2 border-gray-200 rounded-xl md:rounded-2xl px-3 md:px-5 py-2.5 md:py-4 text-sm md:text-base lg:text-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300"
                       />
                     </div>
                     <div>
-                      <label htmlFor="medicine-price" className="block text-gray-700 text-base font-semibold mb-3">
+                      <label htmlFor="medicine-price" className="block text-gray-700 text-sm md:text-base font-semibold mb-2 md:mb-3">
                         Price
                       </label>
                       <input
@@ -630,14 +632,14 @@ export default function InventoryContent({
                         }
                         min="0"
                         placeholder="0.00"
-                        className="w-full bg-gray-50 border-2 border-gray-200 rounded-2xl px-5 py-4 text-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300"
+                        className="w-full bg-gray-50 border-2 border-gray-200 rounded-xl md:rounded-2xl px-3 md:px-5 py-2.5 md:py-4 text-sm md:text-base lg:text-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300"
                       />
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                     <div>
-                      <label htmlFor="medicine-supplier" className="block text-gray-700 text-base font-semibold mb-3">
+                      <label htmlFor="medicine-supplier" className="block text-gray-700 text-sm md:text-base font-semibold mb-2 md:mb-3">
                         Supplier
                       </label>
                       <input
@@ -648,11 +650,11 @@ export default function InventoryContent({
                           setFormData({ ...formData, supplier: e.target.value })
                         }
                         placeholder="Enter supplier name"
-                        className="w-full bg-gray-50 border-2 border-gray-200 rounded-2xl px-5 py-4 text-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300"
+                        className="w-full bg-gray-50 border-2 border-gray-200 rounded-xl md:rounded-2xl px-3 md:px-5 py-2.5 md:py-4 text-sm md:text-base lg:text-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300"
                       />
                     </div>
                     <div>
-                      <label htmlFor="medicine-batch" className="block text-gray-700 text-base font-semibold mb-3">
+                      <label htmlFor="medicine-batch" className="block text-gray-700 text-sm md:text-base font-semibold mb-2 md:mb-3">
                         Batch Number
                       </label>
                       <input
@@ -666,23 +668,25 @@ export default function InventoryContent({
                           })
                         }
                         placeholder="Enter batch number"
-                        className="w-full bg-gray-50 border-2 border-gray-200 rounded-2xl px-5 py-4 text-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300"
+                        className="w-full bg-gray-50 border-2 border-gray-200 rounded-xl md:rounded-2xl px-3 md:px-5 py-2.5 md:py-4 text-sm md:text-base lg:text-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300"
                       />
                     </div>
                   </div>
 
-                  <div className="flex justify-end gap-6 mt-8">
+                  <div className="flex flex-col sm:flex-row justify-end gap-3 md:gap-6 mt-6 md:mt-8">
                     <Button
                       type="button"
                       variant="secondary"
                       onClick={closeModal}
                       disabled={loading}
+                      className="w-full sm:w-auto"
                     >
                       Cancel
                     </Button>
                     <Button
                       type="submit"
                       loading={loading}
+                      className="w-full sm:w-auto"
                     >
                       {editingMedicine ? "Update Medicine" : "Add Medicine"}
                     </Button>

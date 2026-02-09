@@ -102,7 +102,7 @@ export default function LoginForm() {
     >
       <div className="w-full max-w-2xl">
         <motion.div
-          className="text-gray-400 text-sm mb-4"
+          className="text-gray-400 text-xs md:text-sm mb-2 md:mb-4"
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.1 }}
@@ -111,12 +111,12 @@ export default function LoginForm() {
         </motion.div>
 
         <motion.div
-          className="text-center mb-8"
+          className="text-center mb-6 md:mb-8"
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.2 }}
         >
-          <div className="flex items-center justify-center gap-3 mb-3 group">
+          <div className="flex items-center justify-center gap-2 md:gap-3 mb-2 md:mb-3 group">
             <motion.div
               className="flex items-center justify-center"
               whileHover={{ scale: 1.1, rotate: 3 }}
@@ -127,44 +127,44 @@ export default function LoginForm() {
                 alt="MedSync Logo"
                 width={48}
                 height={48}
-                className="w-12 h-12"
+                className="w-10 h-10 md:w-12 md:h-12"
               />
             </motion.div>
-            <span className="text-teal-700 text-3xl font-bold tracking-tight">
+            <span className="text-teal-700 text-2xl md:text-3xl font-bold tracking-tight">
               MedSync
             </span>
           </div>
-          <p className="text-gray-600 text-sm font-light">
+          <p className="text-gray-600 text-xs md:text-sm font-light">
             Smart Medical Inventory. Made Simple.
           </p>
         </motion.div>
 
         <motion.div
-          className="bg-white rounded-3xl shadow-2xl p-8 backdrop-blur-sm border border-white/50"
+          className="bg-white rounded-2xl md:rounded-3xl shadow-2xl p-4 md:p-8 backdrop-blur-sm border border-white/50"
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.3 }}
         >
           <motion.div
-            className="mb-6"
+            className="mb-4 md:mb-6"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
           >
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-teal-600 to-teal-800 bg-clip-text text-transparent mb-2">
+            <h1 className="text-2xl md:text-4xl font-bold bg-gradient-to-r from-teal-600 to-teal-800 bg-clip-text text-transparent mb-2">
               Welcome Back
             </h1>
-            <p className="text-gray-600 font-light">Sign in to your MedSync Account</p>
+            <p className="text-gray-600 text-sm md:text-base font-light">Sign in to your MedSync Account</p>
           </motion.div>
 
-          <div className="flex gap-3 mb-6">
+          <div className="flex flex-col sm:flex-row gap-2 md:gap-3 mb-4 md:mb-6">
             <Link href="/login" className="flex-1">
-              <Button variant="primary" fullWidth>
+              <Button variant="primary" fullWidth size="md">
                 Sign In
               </Button>
             </Link>
             <Link href="/signup" className="flex-1">
-              <Button variant="secondary" fullWidth>
+              <Button variant="secondary" fullWidth size="md">
                 Sign Up
               </Button>
             </Link>
@@ -208,7 +208,7 @@ export default function LoginForm() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
             >
-              <label className="block text-gray-700 text-sm font-semibold mb-2">
+              <label className="block text-gray-700 text-xs md:text-sm font-semibold mb-2">
                 Email Address
               </label>
               <input
@@ -216,7 +216,7 @@ export default function LoginForm() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="w-full bg-gray-50 border-2 border-gray-200 rounded-xl px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 hover:border-gray-300"
+                className="w-full bg-gray-50 border-2 border-gray-200 rounded-xl px-3 md:px-4 py-2.5 md:py-3.5 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 hover:border-gray-300"
                 placeholder="Enter your email"
               />
             </motion.div>
@@ -227,7 +227,7 @@ export default function LoginForm() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 }}
             >
-              <label className="block text-gray-700 text-sm font-semibold mb-2">
+              <label className="block text-gray-700 text-xs md:text-sm font-semibold mb-2">
                 Password
               </label>
               <div className="relative">
@@ -236,7 +236,7 @@ export default function LoginForm() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  className="w-full bg-gray-50 border-2 border-gray-200 rounded-xl px-4 py-3.5 pr-12 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 hover:border-gray-300"
+                  className="w-full bg-gray-50 border-2 border-gray-200 rounded-xl px-3 md:px-4 py-2.5 md:py-3.5 pr-10 md:pr-12 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 hover:border-gray-300"
                   placeholder="Enter your password"
                 />
                 <button
