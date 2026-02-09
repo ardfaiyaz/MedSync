@@ -8,8 +8,9 @@ A modern, full-stack medical inventory management system built with Next.js, Sup
 - **User Authentication**: Secure sign-up and login with email/password
 - **Dashboard Overview**: Real-time statistics and recent activity tracking
 - **Inventory Management**: Full CRUD operations for medicines
-  - Add, edit, and delete medicines
+  - Add, edit, and delete medicines with confirmation modals
   - Search and filter functionality
+  - Sortable tables (click column headers to sort)
   - Status badges (In Stock, Low Stock, Expiring Soon, Expired)
 - **Smart Alerts**: Automatic tracking of:
   - Low stock items
@@ -17,13 +18,19 @@ A modern, full-stack medical inventory management system built with Next.js, Sup
   - Expired medicines
 - **Activity Logging**: Complete audit trail of all actions
 - **User Profiles**: Comprehensive user information with email integration
+  - Profile editing with form validation
+  - License upload to Supabase Storage
+  - Address management
 
 ### Design & UX
-- **Modern UI**: Clean, professional design with Inter font
-- **Responsive Design**: Works seamlessly on all devices
-- **Smooth Animations**: Polished transitions and animations
-- **Icon-Based Interface**: Lucide React icons throughout
-- **Accessibility**: Proper ARIA labels and keyboard navigation
+- **Modern UI**: Clean, professional medical-themed design with Inter font
+- **Framer Motion Animations**: Smooth, performant animations throughout
+- **Loading States**: Circular loading indicators in all buttons
+- **Confirmation Modals**: Custom confirmation dialogs for all CRUD operations
+- **Responsive Design**: Works seamlessly on all devices (mobile-first)
+- **Sortable Tables**: Click any column header to sort data
+- **Accessibility**: WCAG AA compliant with proper ARIA labels and keyboard navigation
+- **Design Tokens**: Consistent teal + neutral color palette
 
 ## 🛠️ Tech Stack
 
@@ -68,13 +75,16 @@ npm install
 
 ### 4. Configure Environment Variables
 
-Create a `.env.local` file in the project root:
+Create a `.env.local` file in the project root (copy from `.env.example`):
 
 ```env
 NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
+DEBUG=true  # Optional: bypasses email verification for local development
 ```
+
+**Important**: Make sure to create a Supabase Storage bucket named `licenses` for profile license uploads.
 
 ### 5. Run the Development Server
 
@@ -150,15 +160,24 @@ medsync/
 
 1. Push your code to GitHub
 2. Import your repository in Vercel
-3. Add environment variables in Vercel dashboard
+3. Add environment variables in Vercel dashboard:
+   - `NEXT_PUBLIC_SUPABASE_URL`
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+   - `SUPABASE_SERVICE_ROLE_KEY`
 4. Deploy!
 
-### Environment Variables for Production
+The app is fully Vercel-ready with:
+- ✅ Optimized build configuration
+- ✅ Proper environment variable handling
+- ✅ Server-side rendering support
+- ✅ Static asset optimization
 
-Make sure to set these in your deployment platform:
-- `NEXT_PUBLIC_SUPABASE_URL`
-- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
-- `SUPABASE_SERVICE_ROLE_KEY`
+### Supabase Storage Setup
+
+For profile license uploads to work:
+1. Go to Supabase Dashboard → Storage
+2. Create a new bucket named `licenses`
+3. Set bucket to public (or configure RLS policies as needed)
 
 ## 🧪 Testing
 

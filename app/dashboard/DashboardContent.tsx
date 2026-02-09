@@ -2,7 +2,10 @@
 
 import Sidebar from "@/components/Sidebar";
 import { Profile, ActivityLog } from "@/types/database";
+import { motion } from "framer-motion";
 import { Package, AlertTriangle, Clock, XCircle, Plus, Activity } from "lucide-react";
+import Button from "@/components/ui/Button";
+import Link from "next/link";
 
 interface DashboardContentProps {
   profile: Profile | null;
@@ -14,6 +17,19 @@ interface DashboardContentProps {
     profiles: { first_name: string | null; last_name: string | null } | null;
   })[];
 }
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: i * 0.1,
+      duration: 0.5,
+      ease: "easeOut",
+    },
+  }),
+};
 
 export default function DashboardContent({
   profile,
@@ -40,18 +56,61 @@ export default function DashboardContent({
     return `${Math.floor(diffInSeconds / 86400)} day${Math.floor(diffInSeconds / 86400) > 1 ? "s" : ""} ago`;
   };
 
+  const statsCards = [
+    {
+      icon: Package,
+      label: "Total Medicines",
+      value: totalMedicines,
+      color: "blue",
+      gradient: "from-blue-600 to-blue-700",
+      bgGradient: "from-blue-100 to-blue-200",
+    },
+    {
+      icon: AlertTriangle,
+      label: "Low Stock",
+      value: lowStockCount,
+      color: "yellow",
+      gradient: "from-yellow-600 to-yellow-700",
+      bgGradient: "from-yellow-100 to-yellow-200",
+    },
+    {
+      icon: Clock,
+      label: "Expiring Soon",
+      value: expiringSoonCount,
+      color: "orange",
+      gradient: "from-orange-600 to-orange-700",
+      bgGradient: "from-orange-100 to-orange-200",
+    },
+    {
+      icon: XCircle,
+      label: "Expired",
+      value: expiredCount,
+      color: "red",
+      gradient: "from-red-600 to-red-700",
+      bgGradient: "from-red-100 to-red-200",
+    },
+  ];
+
   return (
     <div className="flex min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
-      {/* Sidebar */}
       <Sidebar activePage="dashboard" />
 
-      {/* Main Content */}
-      <div className="flex-1 flex flex-col animate-fadeIn">
-        {/* Page Title */}
-        <div className="text-gray-400 text-sm px-8 pt-4 animate-fadeIn delay-100">Dashboard</div>
+      <div className="flex-1 flex flex-col">
+        <motion.div
+          className="text-gray-400 text-sm px-8 pt-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.1 }}
+        >
+          Dashboard
+        </motion.div>
 
-        {/* Top Bar */}
-        <div className="bg-white/80 backdrop-blur-sm px-10 py-8 border-b border-gray-200/50 shadow-sm animate-slideDown delay-200">
+        <motion.div
+          className="bg-white/80 backdrop-blur-sm px-10 py-8 border-b border-gray-200/50 shadow-sm"
+          initial={{ y: -20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.2 }}
+        >
           <div className="flex justify-between items-center">
             <div>
               <h1 className="text-5xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
@@ -59,87 +118,53 @@ export default function DashboardContent({
               </h1>
               <p className="text-gray-600 mt-2 text-lg font-light">Welcome back, {userName}</p>
             </div>
-            <div className="flex items-center gap-4">
-              <a
-                href="/inventory"
-                className="bg-gradient-to-r from-green-600 to-green-700 text-white px-8 py-4 rounded-xl font-semibold shadow-lg text-lg flex items-center gap-2"
-              >
+            <Link href="/inventory">
+              <Button size="lg">
                 <Plus className="w-6 h-6" />
                 Add Medicine
-              </a>
-            </div>
+              </Button>
+            </Link>
           </div>
-        </div>
+        </motion.div>
 
-        {/* Content Area */}
-        <div className="flex-1 p-10 animate-fadeIn delay-300">
-          {/* Summary Cards */}
+        <div className="flex-1 p-10">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
-            {/* Card 1 - Total Medicines */}
-            <div className="bg-white rounded-3xl shadow-lg p-8 border border-gray-100 animate-slideUp delay-400 relative">
-              <div className="absolute top-6 right-6 w-14 h-14 bg-gradient-to-br from-blue-100 to-blue-200 rounded-full flex items-center justify-center shadow-md">
-                <span className="text-blue-600 text-base font-bold">
-                  {totalMedicines}
-                </span>
-              </div>
-              <div className="mb-4">
-                <Package className="w-16 h-16 text-blue-600" />
-              </div>
-              <p className="text-gray-500 text-base mb-2 font-medium">Total Medicines</p>
-              <p className="text-5xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
-                {totalMedicines}
-              </p>
-            </div>
-
-            {/* Card 2 - Low Stock */}
-            <div className="bg-white rounded-3xl shadow-lg p-8 border border-gray-100 animate-slideUp delay-500 relative">
-              <div className="absolute top-6 right-6 w-14 h-14 bg-gradient-to-br from-yellow-100 to-yellow-200 rounded-full flex items-center justify-center shadow-md">
-                <span className="text-yellow-600 text-base font-bold">
-                  {lowStockCount}
-                </span>
-              </div>
-              <div className="mb-4">
-                <AlertTriangle className="w-16 h-16 text-yellow-600" />
-              </div>
-              <p className="text-gray-500 text-base mb-2 font-medium">Low Stock</p>
-              <p className="text-5xl font-bold bg-gradient-to-r from-yellow-600 to-yellow-700 bg-clip-text text-transparent">
-                {lowStockCount}
-              </p>
-            </div>
-
-            {/* Card 3 - Expiring Soon */}
-            <div className="bg-white rounded-3xl shadow-lg p-8 border border-gray-100 animate-slideUp delay-600 relative">
-              <div className="absolute top-6 right-6 w-14 h-14 bg-gradient-to-br from-orange-100 to-orange-200 rounded-full flex items-center justify-center shadow-md">
-                <span className="text-orange-600 text-base font-bold">
-                  {expiringSoonCount}
-                </span>
-              </div>
-              <div className="mb-4">
-                <Clock className="w-16 h-16 text-orange-600" />
-              </div>
-              <p className="text-gray-500 text-base mb-2 font-medium">Expiring Soon</p>
-              <p className="text-5xl font-bold bg-gradient-to-r from-orange-600 to-orange-700 bg-clip-text text-transparent">
-                {expiringSoonCount}
-              </p>
-            </div>
-
-            {/* Card 4 - Expired */}
-            <div className="bg-white rounded-3xl shadow-lg p-8 border border-gray-100 animate-slideUp delay-700 relative">
-              <div className="absolute top-6 right-6 w-14 h-14 bg-gradient-to-br from-red-100 to-red-200 rounded-full flex items-center justify-center shadow-md">
-                <span className="text-red-600 text-base font-bold">
-                  {expiredCount}
-                </span>
-              </div>
-              <div className="mb-4">
-                <XCircle className="w-16 h-16 text-red-600" />
-              </div>
-              <p className="text-gray-500 text-base mb-2 font-medium">Expired</p>
-              <p className="text-5xl font-bold bg-gradient-to-r from-red-600 to-red-700 bg-clip-text text-transparent">{expiredCount}</p>
-            </div>
+            {statsCards.map((card, index) => {
+              const Icon = card.icon;
+              return (
+                <motion.div
+                  key={card.label}
+                  custom={index}
+                  variants={cardVariants}
+                  initial="hidden"
+                  animate="visible"
+                  className="bg-white rounded-3xl shadow-lg p-8 border border-gray-100 relative overflow-hidden group cursor-pointer"
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  <div className={`absolute top-6 right-6 w-14 h-14 bg-gradient-to-br ${card.bgGradient} rounded-full flex items-center justify-center shadow-md`}>
+                    <span className={`text-${card.color}-600 text-base font-bold`}>
+                      {card.value}
+                    </span>
+                  </div>
+                  <div className="mb-4">
+                    <Icon className={`w-16 h-16 text-${card.color}-600`} />
+                  </div>
+                  <p className="text-gray-500 text-base mb-2 font-medium">{card.label}</p>
+                  <p className={`text-5xl font-bold bg-gradient-to-r ${card.gradient} bg-clip-text text-transparent`}>
+                    {card.value}
+                  </p>
+                </motion.div>
+              );
+            })}
           </div>
 
-          {/* Recent Activity */}
-          <div className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-lg p-8 border border-gray-100 animate-slideUp delay-800">
+          <motion.div
+            className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-lg p-8 border border-gray-100"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+          >
             <div className="flex items-center gap-3 mb-8">
               <Activity className="w-8 h-8 text-teal-600" />
               <h2 className="text-4xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
@@ -154,10 +179,13 @@ export default function DashboardContent({
                       "Unknown"
                     : "System";
                   return (
-                    <div
+                    <motion.div
                       key={activity.id}
-                      className="flex justify-between items-center p-6 rounded-2xl border border-gray-100 bg-gray-50 animate-fadeIn"
-                      style={{ animationDelay: `${index * 0.1}s` }}
+                      className="flex justify-between items-center p-6 rounded-2xl border border-gray-100 bg-gray-50"
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.6 + index * 0.1 }}
+                      whileHover={{ scale: 1.02, x: 5 }}
                     >
                       <div>
                         <p className="text-gray-800 font-semibold text-lg">
@@ -167,17 +195,16 @@ export default function DashboardContent({
                           By {userName} - {formatTimeAgo(activity.created_at)}
                         </p>
                       </div>
-                    </div>
+                    </motion.div>
                   );
                 })}
               </div>
             ) : (
               <p className="text-gray-500 text-lg text-center py-12">No recent activity</p>
             )}
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>
   );
 }
-

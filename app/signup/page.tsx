@@ -4,6 +4,9 @@ import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase/Client";
+import { motion } from "framer-motion";
+import Button from "@/components/ui/Button";
+import Image from "next/image";
 
 export default function SignUpPage() {
   const [formData, setFormData] = useState({
@@ -150,21 +153,42 @@ export default function SignUpPage() {
     }
   };
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-teal-50/30 to-gray-100 py-8 px-4 animate-fadeIn">
+    <motion.div
+      className="min-h-screen bg-gradient-to-br from-gray-50 via-teal-50/30 to-gray-100 py-8 px-4"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
       <div className="w-full max-w-4xl mx-auto animate-slideUp">
         {/* Page Title */}
         <div className="text-gray-400 text-sm mb-4 animate-fadeIn delay-100">Sign Up Page</div>
 
         {/* Logo and Tagline */}
         <div className="text-center mb-8 animate-fadeIn delay-200">
-          <div className="flex items-center justify-center gap-3 mb-3 group">
-            <div className="w-12 h-12 bg-gradient-to-br from-teal-600 to-teal-700 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
-              <span className="text-white font-bold text-xl">M</span>
-            </div>
+          <motion.div
+            className="flex items-center justify-center gap-3 mb-3 group"
+            initial={{ y: -20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.2 }}
+          >
+            <motion.div
+              className="w-12 h-12 bg-gradient-to-br from-teal-600 to-teal-700 rounded-xl flex items-center justify-center shadow-lg relative overflow-hidden"
+              whileHover={{ scale: 1.1, rotate: 3 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-teal-600 to-teal-800 opacity-90" />
+              <Image
+                src="/logo.svg"
+                alt="MedSync Logo"
+                width={32}
+                height={32}
+                className="relative z-10"
+              />
+            </motion.div>
             <span className="text-teal-700 text-3xl font-bold tracking-tight">
               MedSync
             </span>
-          </div>
+          </motion.div>
           <p className="text-gray-600 text-sm font-light">
             Smart Medical Inventory. Made Simple.
           </p>
@@ -183,18 +207,16 @@ export default function SignUpPage() {
           </div>
 
           {/* Tabs */}
-          <div className="flex gap-3 mb-6 animate-fadeIn delay-500">
-            <Link
-              href="/login"
-              className="flex-1 border-2 border-gray-300 text-gray-700 py-3 px-4 rounded-xl text-center font-semibold hover:bg-gray-50 hover:border-teal-500 hover:text-teal-700 transition-all duration-300"
-            >
-              Sign In
+          <div className="flex gap-3 mb-6">
+            <Link href="/login" className="flex-1">
+              <Button variant="secondary" fullWidth>
+                Sign In
+              </Button>
             </Link>
-            <Link
-              href="/signup"
-              className="flex-1 bg-gradient-to-r from-teal-600 to-teal-700 text-white py-3 px-4 rounded-xl text-center font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
-            >
-              Sign Up
+            <Link href="/signup" className="flex-1">
+              <Button variant="primary" fullWidth>
+                Sign Up
+              </Button>
             </Link>
           </div>
 
@@ -479,34 +501,17 @@ export default function SignUpPage() {
             </div>
 
             {/* License Upload Section */}
-            <div>
-              <h3 className="text-lg font-semibold text-gray-800 mb-4">
-                License
-              </h3>
-              <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-teal-600 transition cursor-pointer">
-                <div className="text-4xl mb-2">📤</div>
-                <p className="text-gray-700 font-medium mb-1">Upload ID</p>
-                <p className="text-xs text-gray-500">
-                  Max 5MB. JPG/PNG/PDF only
-                </p>
-              </div>
-            </div>
+            {/* License upload will be handled in the profile page with proper storage integration */}
 
             {/* Submit Button */}
-            <button
+            <Button
               type="submit"
-              disabled={loading}
-              className="w-full bg-gradient-to-r from-teal-600 to-teal-700 text-white py-3.5 rounded-xl font-semibold hover:from-teal-700 hover:to-teal-800 shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300 mt-6 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+              loading={loading}
+              fullWidth
+              className="mt-6"
             >
-              {loading ? (
-                <span className="flex items-center justify-center gap-2">
-                  <span className="animate-spin">⏳</span>
-                  Creating Account...
-                </span>
-              ) : (
-                "Create Account"
-              )}
-            </button>
+              Create Account
+            </Button>
           </form>
 
           {/* Footer */}
@@ -516,7 +521,7 @@ export default function SignUpPage() {
           </p>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

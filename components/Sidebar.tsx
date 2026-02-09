@@ -4,9 +4,12 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase/Client";
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { Home, Package, LogOut, User } from "lucide-react";
+import Image from "next/image";
 
 interface SidebarProps {
-  activePage: "dashboard" | "inventory";
+  activePage: "dashboard" | "inventory" | "profile";
 }
 
 export default function Sidebar({ activePage }: SidebarProps) {
@@ -44,64 +47,105 @@ export default function Sidebar({ activePage }: SidebarProps) {
     router.push("/login");
     router.refresh();
   };
+
+  const navItems = [
+    { href: "/dashboard", label: "Dashboard", icon: Home, key: "dashboard" },
+    { href: "/inventory", label: "Inventory", icon: Package, key: "inventory" },
+    { href: "/profile", label: "Profile", icon: User, key: "profile" },
+  ];
+
   return (
-    <div className="w-64 bg-gradient-to-b from-teal-800 to-teal-900 min-h-screen flex flex-col shadow-2xl animate-slideInLeft">
+    <motion.div
+      className="w-64 bg-gradient-to-b from-teal-800 to-teal-900 min-h-screen flex flex-col shadow-2xl"
+      initial={{ x: -100, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+    >
       {/* Logo */}
-      <div className="p-6 border-b border-teal-700/50 backdrop-blur-sm">
+      <motion.div
+        className="p-6 border-b border-teal-700/50 backdrop-blur-sm"
+        initial={{ y: -20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 0.1 }}
+      >
         <div className="flex items-center gap-3 mb-2 group cursor-pointer">
-          <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
-            <span className="text-teal-800 font-bold text-xl">M</span>
-          </div>
+          <motion.div
+            className="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-lg relative overflow-hidden"
+            whileHover={{ scale: 1.1, rotate: 3 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-teal-600 to-teal-800 opacity-90" />
+            <Image
+              src="/logo.svg"
+              alt="MedSync Logo"
+              width={32}
+              height={32}
+              className="relative z-10"
+            />
+          </motion.div>
           <span className="text-white text-xl font-bold tracking-tight">MedSync</span>
         </div>
         <p className="text-teal-200 text-xs font-light mt-1">Clinical Inventory</p>
-      </div>
+      </motion.div>
 
       {/* Navigation */}
       <nav className="flex-1 p-4 space-y-2">
-        <Link
-          href="/dashboard"
-          className={`flex items-center gap-3 px-4 py-3.5 rounded-xl mb-2 transition-all duration-300 group ${
-            activePage === "dashboard"
-              ? "bg-gradient-to-r from-teal-700 to-teal-600 text-white shadow-lg scale-105"
-              : "text-teal-100 hover:bg-teal-700/50 hover:scale-105 hover:shadow-md"
-          }`}
-        >
-          <span className="text-xl group-hover:scale-110 transition-transform duration-300">🏠</span>
-          <span className="font-medium">Dashboard</span>
-        </Link>
-
-        <Link
-          href="/inventory"
-          className={`flex items-center gap-3 px-4 py-3.5 rounded-xl mb-2 transition-all duration-300 group ${
-            activePage === "inventory"
-              ? "bg-gradient-to-r from-teal-700 to-teal-600 text-white shadow-lg scale-105"
-              : "text-teal-100 hover:bg-teal-700/50 hover:scale-105 hover:shadow-md"
-          }`}
-        >
-          <span className="text-xl group-hover:scale-110 transition-transform duration-300">📦</span>
-          <span className="font-medium">Inventory</span>
-        </Link>
+        {navItems.map((item, index) => {
+          const Icon = item.icon;
+          const isActive = activePage === item.key;
+          return (
+            <motion.div
+              key={item.key}
+              initial={{ x: -20, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ delay: 0.2 + index * 0.1 }}
+            >
+              <Link href={item.href}>
+                <motion.div
+                  className={`flex items-center gap-3 px-4 py-3.5 rounded-xl mb-2 transition-all duration-300 group ${
+                    isActive
+                      ? "bg-gradient-to-r from-teal-700 to-teal-600 text-white shadow-lg"
+                      : "text-teal-100 hover:bg-teal-700/50"
+                  }`}
+                  whileHover={{ scale: 1.05, x: 5 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <Icon className="w-5 h-5" />
+                  <span className="font-medium">{item.label}</span>
+                </motion.div>
+              </Link>
+            </motion.div>
+          );
+        })}
       </nav>
 
       {/* User Profile */}
-      <div className="p-4 border-t border-teal-700/50 backdrop-blur-sm">
+      <motion.div
+        className="p-4 border-t border-teal-700/50 backdrop-blur-sm"
+        initial={{ y: 20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 0.5 }}
+      >
         <div className="flex items-center gap-3 mb-2 group">
-          <div className="w-12 h-12 bg-gradient-to-br from-teal-600 to-teal-700 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-all duration-300">
+          <motion.div
+            className="w-12 h-12 bg-gradient-to-br from-teal-600 to-teal-700 rounded-full flex items-center justify-center shadow-lg"
+            whileHover={{ scale: 1.1 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
             <span className="text-white font-semibold">{userInitials}</span>
-          </div>
-          <div>
+          </motion.div>
+          <div className="flex-1">
             <p className="text-white text-sm font-semibold">{userName}</p>
             <button
               onClick={handleLogout}
-              className="text-teal-200 text-xs hover:text-white hover:underline transition-colors duration-200"
+              className="text-teal-200 text-xs hover:text-white hover:underline transition-colors duration-200 flex items-center gap-1 mt-1"
             >
+              <LogOut className="w-3 h-3" />
               Logout
             </button>
           </div>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
-
